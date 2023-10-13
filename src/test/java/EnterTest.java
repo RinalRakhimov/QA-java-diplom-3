@@ -1,14 +1,13 @@
-import PageObject.ForgotPasswordPage;
-import PageObject.LoginPage;
-import PageObject.MainPage;
-import PageObject.RegistrationPage;
+import ru.yandex.praktikum.browser.Browser;
+import ru.yandex.praktikum.pageobject.ForgotPasswordPage;
+import ru.yandex.praktikum.pageobject.LoginPage;
+import ru.yandex.praktikum.pageobject.MainPage;
+import ru.yandex.praktikum.pageobject.RegistrationPage;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,13 +15,11 @@ import static org.junit.Assert.assertTrue;
 
 public class EnterTest {
     private WebDriver driver;
+    private String browser = "Yandex";
 
     @Before
     public void before() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        //System.setProperty("webdriver.chrome.driver", "yandexdriver.exe");
-        chromeOptions.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver();
+        driver = Browser.getWebDriver(browser);
     }
 
     @Test

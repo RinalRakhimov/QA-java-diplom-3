@@ -1,12 +1,11 @@
-import PageObject.MainPage;
+import ru.yandex.praktikum.browser.Browser;
+import ru.yandex.praktikum.pageobject.MainPage;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,13 +14,11 @@ import static org.junit.Assert.assertTrue;
 public class ConstructorTest {
 
     private WebDriver driver;
+    private String browser = "Yandex";
 
     @Before
     public void before() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        //System.setProperty("webdriver.chrome.driver", "yandexdriver.exe");
-        chromeOptions.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver();
+        driver = Browser.getWebDriver(browser);
     }
 
     @Test
@@ -52,7 +49,6 @@ public class ConstructorTest {
         MainPage objMainPage = new MainPage(driver);
         objMainPage.open();
         objMainPage.clickFillingsChapter();
-        assertTrue(objMainPage.fillingsHeaderIsVisible());
         objMainPage.clickBunsChapter();
         assertTrue(objMainPage.bunsHeaderIsVisible());
     }

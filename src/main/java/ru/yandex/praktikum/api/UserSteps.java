@@ -1,4 +1,4 @@
-package API;
+package ru.yandex.praktikum.api;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
@@ -15,7 +15,7 @@ public class UserSteps {
     private static final String USER_GET_UPDATE_DELETE_ENDPOINT = "/api/auth/user";
 
     @Step("Send POST request to /api/auth/register")
-    @Description("API.User creation")
+    @Description("ru.yandex.praktikum.api.User creation")
     public static Response sendPostRequestUserCreation(Object json){
         return given()
                 .header("Content-type", "application/json")
@@ -25,7 +25,7 @@ public class UserSteps {
     }
 
     @Step("Send POST request to /api/auth/login")
-    @Description("API.User login")
+    @Description("ru.yandex.praktikum.api.User login")
     public static Response sendPostRequestUserLogin(Object json){
         return given()
                 .header("Content-type", "application/json")

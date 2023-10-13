@@ -1,11 +1,11 @@
-package PageObject;
+package ru.yandex.praktikum.pageobject;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
     private final WebDriver driver;
-    public String LOGIN_URL = "https://stellarburgers.nomoreparties.site/login";
     private By enterHeader = By.xpath(".//h2[text()='Вход']");
     private By emailField = By.xpath(".//div/form/fieldset[1]/div/div/input[@name='name']");
     private By passwordField = By.xpath(".//div/form/fieldset[2]/div/div/input[@name='Пароль']");
@@ -18,16 +18,18 @@ public class LoginPage {
         this.email = email;
         this.password = password;
     }
+    @Step("Check login page visibility")
     public boolean loginPageIsVisible() {
         return driver.findElement(enterHeader).isDisplayed();
     }
+    @Step("Authorization")
     public void authorization() {
         driver.findElement(emailField).clear();
         driver.findElement(emailField).sendKeys(email);
         driver.findElement(passwordField).clear();
         driver.findElement(passwordField).sendKeys(password);
     }
-
+    @Step("Click enter button")
     public void clickEnterButton() {
         driver.findElement(enterButton).click();
     }

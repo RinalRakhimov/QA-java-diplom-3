@@ -1,16 +1,15 @@
-import API.User;
-import API.UserSteps;
-import PageObject.LoginPage;
+import ru.yandex.praktikum.api.User;
+import ru.yandex.praktikum.api.UserSteps;
+import ru.yandex.praktikum.browser.Browser;
+import ru.yandex.praktikum.pageobject.LoginPage;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import io.restassured.RestAssured;
-import PageObject.RegistrationPage;
+import ru.yandex.praktikum.pageobject.RegistrationPage;
 
 import static org.junit.Assert.assertTrue;
 import java.util.concurrent.TimeUnit;
@@ -22,14 +21,11 @@ public class RegistrationTest {
     private String password;
     private String accessToken;
     private WebDriver driver;
+    private String browser = "Chrome";
 
     @Before
     public void before() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        //System.setProperty("webdriver.chrome.driver", "yandexdriver.exe");
-        chromeOptions.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver();
-
+        driver = Browser.getWebDriver(browser);
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
     }
 
@@ -48,10 +44,10 @@ public class RegistrationTest {
         objRegistrationPage.userDataFilling(name, email, password);
         objRegistrationPage.clickRegistrationButton();
 
-        assertTrue("Не удалось зарегистрировать нового пользователя", objLoginPage.loginPageIsVisible());
-
         Response responseLoginOfExistUser = UserSteps.sendPostRequestUserLogin(new User(email, password, null));
         accessToken = responseLoginOfExistUser.then().extract().path("accessToken");
+
+        assertTrue("Не удалось зарегистрировать нового пользователя", objLoginPage.loginPageIsVisible());
     }
 
     @Test

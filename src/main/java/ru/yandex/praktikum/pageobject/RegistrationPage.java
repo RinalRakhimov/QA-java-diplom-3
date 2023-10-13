@@ -1,11 +1,12 @@
-package PageObject;
+package ru.yandex.praktikum.pageobject;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class RegistrationPage {
     private final WebDriver driver;
-    public String REG_URL = "https://stellarburgers.nomoreparties.site/register";
+    public static final String REG_URL = "https://stellarburgers.nomoreparties.site/register";
     private By nameField = By.xpath(".//form/fieldset[1]/div/div/input");
     private By emailField = By.xpath(".//form/fieldset[2]/div/div/input");
     private By passwordField = By.xpath(".//form/fieldset[3]/div/div/input");
@@ -23,10 +24,11 @@ public class RegistrationPage {
         this.email = email;
         this.password = password;
     }
-
+    @Step("Open registration page")
     public void open() {
         driver.get(REG_URL);
     }
+    @Step("User data filling")
     public void userDataFilling(String name, String email, String password) {
         driver.findElement(nameField).clear();
         driver.findElement(nameField).sendKeys(name);
@@ -35,14 +37,15 @@ public class RegistrationPage {
         driver.findElement(passwordField).clear();
         driver.findElement(passwordField).sendKeys(password);
     }
+    @Step("Click registration button")
     public void clickRegistrationButton() {
         driver.findElement(regButton).click();
     }
-
+    @Step("Click enter button")
     public void clickEnterButton() {
         driver.findElement(enterButton).click();
     }
-
+    @Step("Check notice of password error")
     public boolean passwordErrorIsVisible() {
         return driver.findElement(passwordError).isDisplayed();
     }

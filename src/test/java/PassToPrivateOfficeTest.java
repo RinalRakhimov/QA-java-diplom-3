@@ -1,8 +1,9 @@
-import API.User;
-import API.UserSteps;
-import PageObject.AccountPage;
-import PageObject.LoginPage;
-import PageObject.MainPage;
+import ru.yandex.praktikum.api.User;
+import ru.yandex.praktikum.api.UserSteps;
+import ru.yandex.praktikum.browser.Browser;
+import ru.yandex.praktikum.pageobject.AccountPage;
+import ru.yandex.praktikum.pageobject.LoginPage;
+import ru.yandex.praktikum.pageobject.MainPage;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -11,8 +12,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,14 +23,11 @@ public class PassToPrivateOfficeTest {
     private String email;
     private String password;
     private String accessToken;
+    private String browser = "Yandex";
 
     @Before
     public void before() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        //System.setProperty("webdriver.chrome.driver", "yandexdriver.exe");
-        chromeOptions.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver();
-
+        driver = Browser.getWebDriver(browser);
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
     }
     @Test

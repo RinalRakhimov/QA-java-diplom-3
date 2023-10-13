@@ -1,4 +1,4 @@
-package API;
+package ru.yandex.praktikum.api;
 
 public class User {
 
